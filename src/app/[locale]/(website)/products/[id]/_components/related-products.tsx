@@ -1,17 +1,27 @@
-import { getRelatedProducts } from '@/lib/services/reviews/get-related-products';
 import { getTranslations } from 'next-intl/server';
 import MainHeading from '@/app/[locale]/(website)/(home)/_components/main-heading';
 import ProductsCarousel from '@/components/shared/products-carousel';
+import type { getRelatedProducts } from '@/lib/services/reviews/get-related-products';
+import type { SettledPromise } from './settle-promise';
 
-export default async function RelatedProducts({ productId }: { productId: string }) {
-  // Translations
-  const t = await getTranslations('reviews');
+type RelatedProductsProps = {
+  relatedProductsPromise: SettledPromise<
+    Awaited<ReturnType<typeof getRelatedProducts>>
+  >;
+};
 
-  // Hooks
-  // const { data: fetchedRelatedProducts } = useRelatedProducts(productId);
-  const fetchedRelatedProducts = await getRelatedProducts(productId);
+export default async function RelatedProducts({
+  relatedProductsPromise,
+}: RelatedProductsProps) {
+  const [t, fetchedRelatedProducts] = await Promise.all([
+    getTranslations('reviews'),
+    relatedProductsPromise,
+  ]);
+  if (fetchedRelatedProducts.status === 'rejected') {
+    throw fetchedRelatedProducts.reason;
+  }
 
-  if (!fetchedRelatedProducts || fetchedRelatedProducts.length === 0) {
+  if (!fetchedRelatedProducts.value || fetchedRelatedProducts.value.length === 0) {
     return null;
   }
 
@@ -22,7 +32,7 @@ export default async function RelatedProducts({ productId }: { productId: string
         className="mb-5 items-start text-start"
         paragraph={t('related-products')}
       />
-      <ProductsCarousel relatedProducts={fetchedRelatedProducts} />
+      <ProductsCarousel relatedProducts={fetchedRelatedProducts.value} />
     </div>
   );
 }

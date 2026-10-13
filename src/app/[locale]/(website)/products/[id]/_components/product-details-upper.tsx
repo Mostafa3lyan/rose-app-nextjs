@@ -34,6 +34,7 @@ export default function ProductDetailsUpper({ product }: { product: Product }) {
             src={gallery[selectedIndex]}
             alt={product.title}
             fill
+            sizes="(max-width: 1023px) 100vw, 50vw"
             // Use contain to ensure the entire image is visible without cropping ✅
             className="object-contain"
             priority
@@ -58,6 +59,7 @@ export default function ProductDetailsUpper({ product }: { product: Product }) {
                 src={url}
                 alt={`${product.title} - ${idx + 1}`}
                 fill
+                sizes="80px"
                 className="object-cover"
               />
             </button>

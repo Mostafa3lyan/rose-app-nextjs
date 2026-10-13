@@ -13,13 +13,22 @@ import { AddressFormSchema } from '@/lib/schema/address.schema';
 import { Address } from '@/lib/types/user-addresses';
 import { cn } from '@/lib/utility/tailwind-merge';
 import { useTranslations } from 'next-intl';
+import dynamic from 'next/dynamic';
 import React, { useState } from 'react';
 import { useAddAddress } from '../_hooks/use-add-address';
 import { useDeleteAddress } from '../_hooks/use-delete-address';
 import { useUpdateAddress } from '../_hooks/use-update-address';
 import AddressForm from './add-address-form';
 import AddressSelector from './address-selector';
-import MapSelector from './map-selector';
+
+const MapSelector = dynamic(() => import('./map-selector'), {
+  loading: () => (
+    <div
+      aria-busy="true"
+      className="h-[400px] w-full animate-pulse rounded-lg bg-muted"
+    />
+  ),
+});
 
 interface AddressesModalProps {
   userAddresses: Address[];

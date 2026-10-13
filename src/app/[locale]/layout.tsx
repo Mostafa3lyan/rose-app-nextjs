@@ -6,7 +6,7 @@ import { Inter, Mulish, Sarabun, Tajawal, Zain } from 'next/font/google';
 import { notFound } from 'next/navigation';
 
 const sarabun = Sarabun({
-  subsets: ['latin', 'thai'],
+  subsets: ['latin'],
   weight: ['300', '400', '500', '600', '700'],
   variable: '--font-sarabun',
 });
@@ -21,18 +21,21 @@ const zain = Zain({
   weight: ['400', '700'],
   variable: '--font-zain',
   display: 'swap',
+  preload: false,
 });
 
 const inter = Inter({
   subsets: ['latin'],
   weight: ['700'],
   variable: '--font-inter',
+  preload: false,
 });
 
 const mulish = Mulish({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700'],
   variable: '--font-mulish',
+  preload: false,
 });
 
 type LayoutProps = {

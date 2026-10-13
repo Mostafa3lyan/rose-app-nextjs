@@ -70,7 +70,7 @@ const HeroCarousel: React.FC<PropType> = ({ slides, options, locale }) => {
       <div className="h-full overflow-hidden" ref={emblaRef}>
         {/* container */}
         <div className="flex">
-          {slides.map((slide) => (
+          {slides.map((slide, index) => (
             <div
               key={slide.id}
               className="relative h-[27.5rem] flex-[0_0_100%]"
@@ -79,8 +79,9 @@ const HeroCarousel: React.FC<PropType> = ({ slides, options, locale }) => {
                 src={slide.img}
                 alt={slide.alt}
                 fill
+                sizes="(max-width: 1023px) 100vw, 65vw"
                 className="max-w-[59.6875rem] rounded-2xl object-center sm:object-cover xl:max-w-none"
-                priority
+                priority={index === 0}
               />
             </div>
           ))}

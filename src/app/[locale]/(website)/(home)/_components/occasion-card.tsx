@@ -29,8 +29,8 @@ export default function OccasionCard({
         width={410}
         height={271}
         alt={alt}
+        sizes="(max-width: 767px) calc(100vw - 5rem), (max-width: 1023px) 50vw, 33vw"
         className="w-full rounded-2xl"
-        priority
       />
       <figcaption className="absolute bottom-0 z-20 flex flex-col gap-2 p-6">
         <Badge

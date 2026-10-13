@@ -64,6 +64,7 @@ export default function ProductCard({
           src={src}
           alt={title}
           fill
+          sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
         />
       </Link>
 

@@ -39,11 +39,12 @@ export default function Hero() {
       {/* Static Image */}
       <figure className="relative h-full max-h-[27.5rem] w-full flex-1 lg:max-w-[18.8125rem]">
         <Image
-          src={'/assets/images/gift.png'}
+          src={'/assets/images/gift.jpg'}
           width={301}
           height={440}
           alt="gift"
           priority
+          sizes="(max-width: 639px) calc(100vw - 5rem), 301px"
           className="h-full max-h-[27.5rem] w-full rounded-2xl"
         />
 

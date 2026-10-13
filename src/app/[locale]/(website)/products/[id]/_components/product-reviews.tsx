@@ -5,21 +5,32 @@ import { Star } from 'lucide-react';
 import ReviewForm from './review-form';
 import ReviewItem from './review-item';
 import { getLocale, getTranslations } from 'next-intl/server';
-import { getReviews } from '@/lib/services/reviews/get-product-reviews';
 import MainHeading from '@/app/[locale]/(website)/(home)/_components/main-heading';
+import type { getReviews } from '@/lib/services/reviews/get-product-reviews';
+import type { SettledPromise } from './settle-promise';
 
-export async function ProductsReviews({ productId }: { productId: string }) {
-  // Translations
-  const t = await getTranslations('reviews');
-  const locale = await getLocale();
+type ProductsReviewsProps = {
+  productId: string;
+  reviewsPromise: SettledPromise<Awaited<ReturnType<typeof getReviews>>>;
+};
 
-  
-  const fetchedReviews = await getReviews(productId);
+export async function ProductsReviews({
+  productId,
+  reviewsPromise,
+}: ProductsReviewsProps) {
+  const [t, locale, fetchedReviews] = await Promise.all([
+    getTranslations('reviews'),
+    getLocale(),
+    reviewsPromise,
+  ]);
+  if (fetchedReviews.status === 'rejected') {
+    throw fetchedReviews.reason;
+  }
+  const reviews = fetchedReviews.value;
 
   const averageRating =
-    fetchedReviews && fetchedReviews.length > 0
-      ? fetchedReviews.reduce((sum, review) => sum + review.rating, 0) /
-        fetchedReviews.length
+    reviews && reviews.length > 0
+      ? reviews.reduce((sum, review) => sum + review.rating, 0) / reviews.length
       : 0;
 
   // Format numbers based on locale
@@ -37,7 +48,7 @@ export async function ProductsReviews({ productId }: { productId: string }) {
   };
 
   // Error
-  if (fetchedReviews === null || fetchedReviews === undefined) {
+  if (reviews === null || reviews === undefined) {
     return (
       <p className="py-8 text-center text-red-500">{t('error-loading')}</p>
     );
@@ -52,7 +63,7 @@ export async function ProductsReviews({ productId }: { productId: string }) {
           paragraph={t('title')}
         />
 
-        {fetchedReviews && fetchedReviews.length > 0 ? (
+        {reviews && reviews.length > 0 ? (
           <>
             {/* Rating Summary */}
             <div className="mb-8">
@@ -63,7 +74,7 @@ export async function ProductsReviews({ productId }: { productId: string }) {
                 <span className="text-2xl font-bold text-zinc-800 dark:text-zinc-50">
                   {formatNumber(averageRating)}{' '}
                   <span className="text-sm font-medium text-zinc-500 dark:text-zinc-200">
-                    ({formatCount(fetchedReviews.length)} {t('ratings-count')})
+                    ({formatCount(reviews.length)} {t('ratings-count')})
                   </span>
                 </span>
                 <Rating rate={averageRating} className="[&_svg]:size-5" />
@@ -74,7 +85,7 @@ export async function ProductsReviews({ productId }: { productId: string }) {
             <div className="grid grid-cols-1 gap-8 border-t pt-4 dark:border-zinc-50 lg:grid-cols-2">
               {/* Reviews List - Scrollable */}
               <div className="max-h-96 space-y-2 overflow-y-auto pe-4">
-                {fetchedReviews.map((review, index) => (
+                {reviews.map((review, index) => (
                   <div key={review._id}>
                     {index > 0 && (
                       <Separator className="mb-6 dark:bg-zinc-50" />
