@@ -7,11 +7,13 @@ import Headerlocation from './header-location';
 import HeaderInfo from './header-info';
 import HeaderSearch from './header-search';
 import { getServerSession } from 'next-auth';
+import { getTranslations } from 'next-intl/server';
 import { authOption } from '@/auth';
 import { User } from '@/lib/types/auth';
 
 export default async function Header() {
   const session = await getServerSession(authOption);
+  const t = await getTranslations('header');
 
   return (
     <header>
@@ -23,7 +25,7 @@ export default async function Header() {
               src="/assets/images/logo.png"
               width={60}
               height={60}
-              alt="Logo"
+              alt={t('logo-alt')}
               className="hidden lg:flex"
             />
           </Link>

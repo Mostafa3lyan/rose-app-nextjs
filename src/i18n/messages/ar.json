@@ -47,7 +47,10 @@
       "categories": "الفئات",
       "occasions": "المناسبات",
       "contact": "تواصل معنا",
-      "about": "من نحن"
+      "about": "من نحن",
+      "navigation-label": "التنقل الرئيسي",
+      "open-menu": "فتح القائمة",
+      "close-menu": "إغلاق القائمة"
     }
   },
   "about": {
@@ -380,7 +383,10 @@
     "login": "تسجيل الدخول",
     "register": "تسجيل حساب جديد",
     "deliver to": "توصيل إلى ",
-    "search": "ما هي الهدية المميزة التي تبحث عنها؟"
+    "search": "ما هي الهدية المميزة التي تبحث عنها؟",
+    "greeting": "مرحبًا",
+    "logo-alt": "تطبيق روز",
+    "wishlist": "قائمة الأمنيات"
   },
 
   "footer": {
@@ -569,7 +575,7 @@
     },
     "all-categories": {
       "title": "جميع الفئات",
-      "products": "منتج",
+      "products": "منتجات",
       "empty": "لا توجد فئات"
     },
     "dashboard-occasion": {
@@ -611,7 +617,9 @@
       "rating": "التقييمات",
       "no-products-found": "لا توجد منتجات",
       "no-products-match": "لا توجد منتجات تطابق بحثك.",
-      "currency": "ج.م"
+      "currency": "ج.م",
+      "success-delete-message": "تم حذف المنتج بنجاح",
+      "error-delete-message": "فشل في حذف المنتج"
     },
     "top-selling": {
       "title": "المنتجات الأكثر مبيعاً",
@@ -620,7 +628,7 @@
     },
     "low-stock": {
       "title": "المنتجات منخفضة المخزون",
-      "products": "منتج",
+      "products": "منتجات",
       "currency": "ج.م"
     }
   },

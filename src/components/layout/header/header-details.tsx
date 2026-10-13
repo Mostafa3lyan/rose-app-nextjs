@@ -18,7 +18,7 @@ export default function HeaderDetails() {
   //   Variables
   const pathnameWithoutLocale = pathname.replace(/^\/(en|ar)/, '') || '/';
   return (
-    <nav aria-label="sidebar menu" className="hidden lg:flex">
+    <nav aria-label={t('header.navigation-label')} className="hidden lg:flex">
       <ul className="flex w-full items-center justify-center gap-4 bg-maroon-700 dark:bg-softpink-200">
         {homeheadercolumnItems.map((item) => {
           const { Icon } = item;

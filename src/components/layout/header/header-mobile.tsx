@@ -18,6 +18,7 @@ interface HeaderInfoProps {
 export default function HeaderMobile({ user }: HeaderInfoProps) {
   // Translation
   const t = useTranslations('homepage');
+  const tHeader = useTranslations('header');
 
   // State
   const [isOpen, setIsOpen] = useState(false);
@@ -35,7 +36,7 @@ export default function HeaderMobile({ user }: HeaderInfoProps) {
         <button
           className="right-0"
           onClick={() => setIsOpen(!isOpen)}
-          aria-label="Toggle menu"
+          aria-label={t('header.open-menu')}
         >
           <svg
             className="h-6 w-6"
@@ -64,7 +65,7 @@ export default function HeaderMobile({ user }: HeaderInfoProps) {
 
       {/* Mobile sliding menu */}
       <nav
-        aria-label="Mobile menu"
+        aria-label={t('header.navigation-label')}
         className={cn(
           'fixed inset-y-0 right-0 z-50 w-40 transform bg-maroon-700 shadow-lg transition-transform duration-300 ease-in-out dark:bg-softpink-200',
           isOpen ? 'translate-x-0' : 'translate-x-full',
@@ -74,7 +75,7 @@ export default function HeaderMobile({ user }: HeaderInfoProps) {
         <button
           className="flex w-full justify-end p-3"
           onClick={() => setIsOpen(false)}
-          aria-label="Close menu"
+          aria-label={t('header.close-menu')}
         >
           <svg
             className="h-5 w-5 text-zinc-50 dark:text-zinc-800"
@@ -100,7 +101,7 @@ export default function HeaderMobile({ user }: HeaderInfoProps) {
                 src="/assets/images/logo.png"
                 width={60}
                 height={60}
-                alt="Logo"
+                alt={tHeader('logo-alt')}
               />
             </Link>
           </li>

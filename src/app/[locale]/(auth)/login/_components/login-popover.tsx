@@ -51,7 +51,7 @@ export default function LoginPopover() {
   return (
     <div
       className={cn(
-        'absolute top-8 z-30 rounded-md bg-white opacity-0 shadow-lg transition group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100',
+        'absolute top-8 z-30 rounded-md bg-white opacity-0 shadow-lg transition group-focus-within:visible group-focus-within:opacity-100 ',
         locale === 'ar' ? 'left-0' : 'right-0',
       )}
     >

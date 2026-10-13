@@ -47,7 +47,10 @@
       "categories": "categories",
       "occasions": "occasions",
       "contact": "contact",
-      "about": "about"
+      "about": "about",
+      "navigation-label": "Main navigation",
+      "open-menu": "Open menu",
+      "close-menu": "Close menu"
     }
   },
   "about": {
@@ -368,7 +371,10 @@
     "login": "Login",
     "register": "Register",
     "deliver to": "Deliver to",
-    "search": "What awesome gift are you looking for?"
+    "search": "What awesome gift are you looking for?",
+    "greeting": "Hello",
+    "logo-alt": "Rose App",
+    "wishlist": "Wishlist"
   },
 
   "footer": {
