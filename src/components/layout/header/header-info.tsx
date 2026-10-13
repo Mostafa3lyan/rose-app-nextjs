@@ -7,7 +7,6 @@ import { Badge } from '@/components/ui/badge';
 import ThemeToggleIcon from '../app/theme-toggle';
 import HeaderUsernameClient from './header-username-client';
 import { User } from '@/lib/types/auth';
-import NotificationsList from '@/components/features/notifications/notification-list';
 import { useLocale } from 'next-intl';
 import { useRouter } from '@/i18n/navigation';
 import { useCart } from '@/lib/hooks/cart/use-cart';
@@ -56,9 +55,6 @@ export default function HeaderInfo({ user }: HeaderInfoProps) {
           </Badge>
         </button>
 
-        {/* <button className="relative hover:text-red-800"> */}
-          <NotificationsList />
-        {/* </button> */}
       </div>
 
       <div className="hidden lg:flex">

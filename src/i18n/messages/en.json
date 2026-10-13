@@ -127,7 +127,6 @@
     "zoomImage": "Zoom image",
     "zoomHint": "Click outside to close",
     "selectImage": "Select image {index}",
-    "notifyHint": "This item is currently unavailable.",
     "toast": {
       "adding": "Adding to cart...",
       "added": "Added to cart",
