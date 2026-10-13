@@ -20,23 +20,37 @@ export default function useLogin() {
         rememberMe: credentials.rememberMe ? 'true' : 'false',
       });
       if (response?.ok) {
-        const callbackUrl =
-          new URLSearchParams(location.search).get('callbackUrl') || '/';
-        return (location.href = callbackUrl);
+        return (
+          new URLSearchParams(location.search).get('callbackUrl') || '/'
+        );
       }
       // Handle authentication error
       if (response?.error) {
         throw new Error(response.error);
       }
-      return response;
+      throw new Error('Unable to sign in');
     },
 
-    onSuccess: async () => {
-      // ✅ transfer local wishlist to server
-      await sendWhishlistProductsFromStorageToServer();
+    onSuccess: async (callbackUrl) => {
+      try {
+        await sendWhishlistProductsFromStorageToServer();
+      } catch (error) {
+        toast.error(
+          error instanceof Error
+            ? error.message
+            : 'Unable to sync your wishlist',
+        );
+      }
 
-      // ✅ transfer guest cart to server
-      await sendCartItemsFromStorageToServer();
+      try {
+        await sendCartItemsFromStorageToServer();
+      } catch (error) {
+        toast.error(
+          error instanceof Error ? error.message : 'Unable to sync your cart',
+        );
+      }
+
+      location.assign(callbackUrl);
     },
 
     onError: (error) => {

@@ -27,10 +27,13 @@ export default function HeaderInfo({ user }: HeaderInfoProps) {
   const { data } = useCart();
 
   // Hooks
-  const { totalItems } = useGuestCartContext();
+  const { totalQuantity } = useGuestCartContext();
 
   // Variables
-  const numOfCartItems = user ? data?.numOfCartItems : totalItems;
+  const numOfCartItems = user
+    ? (data?.cart.cartItems.reduce((total, item) => total + item.quantity, 0) ??
+      0)
+    : totalQuantity;
 
   return (
     <div className="flex items-center gap-1">

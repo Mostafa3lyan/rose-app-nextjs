@@ -45,7 +45,7 @@ export default function LoginPopover() {
 
   // Function
   const onSubmit: SubmitHandler<LoginFormFields> = (values) => {
-    login(values);
+    login({ ...values, rememberMe });
   };
 
   return (

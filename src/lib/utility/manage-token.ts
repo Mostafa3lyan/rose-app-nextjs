@@ -2,14 +2,10 @@
 
 import { decode, encode, JWT } from "next-auth/jwt";
 import { cookies } from "next/headers";
-
-const cookieName =
-  process.env.NODE_ENV === "production"
-    ? "__Secure-next-auth.session-token"
-    : "next-auth.session-token";
+import { SESSION_COOKIE_NAME } from '@/lib/auth/session-cookie';
 
 export async function getToken() {
-  const tokenCookie = cookies().get(cookieName)?.value;
+  const tokenCookie = cookies().get(SESSION_COOKIE_NAME)?.value;
 
   try {
     const jwt = await decode({
@@ -34,7 +30,7 @@ export async function setToken(token: JWT) {
     maxAge: 60 * 60 * 24 * 7,
   });
 
-  cookies().set(cookieName, encodedToken, {
+  cookies().set(SESSION_COOKIE_NAME, encodedToken, {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     maxAge: 1000 * 60 * 60 * 24 * 7,

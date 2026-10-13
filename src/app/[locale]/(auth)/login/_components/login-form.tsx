@@ -49,7 +49,7 @@ export default function LoginForm() {
 
   // Function
   const onSubmit: SubmitHandler<LoginFormFields> = (values) => {
-    login(values);
+    login({ ...values, rememberMe });
   };
 
   return (

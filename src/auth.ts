@@ -2,6 +2,7 @@ import { LoginResponse } from '@/lib/types/auth';
 import { NextAuthOptions } from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
 import { JSON_HEADER } from '@/lib/constants/api.constant';
+import { SESSION_COOKIE_NAME } from '@/lib/auth/session-cookie';
 
 export const authOption: NextAuthOptions = {
   providers: [
@@ -50,9 +51,6 @@ export const authOption: NextAuthOptions = {
         token.accessToken = user.accessToken;
         token.user = user.user;
         token.rememberMe = user.rememberMe;
-        if (!user.rememberMe) {
-          token.exp = Math.floor(Date.now() / 1000) + 60 * 5; // 5 minutes
-        }
       }
 
       return token;
@@ -63,10 +61,9 @@ export const authOption: NextAuthOptions = {
       return session;
     },
   },
-  //  remeber me cookie
   cookies: {
     sessionToken: {
-      name: `next-auth.session-token`,
+      name: SESSION_COOKIE_NAME,
       options: {
         httpOnly: true,
         sameSite: 'lax',
